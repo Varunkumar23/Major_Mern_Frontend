@@ -1,7 +1,7 @@
 import { Route, Routes } from "react-router";
 import { BrowserRouter } from "react-router";
 import useAppContext from "./contexts/useAppContext";
-import { BounceLoader } from "react-spinners";
+import { BounceLoader, RingLoader } from "react-spinners";
 import { SignupPage } from "./pages/SignupPage";
 import { LoginPage } from "./pages/LoginPage";
 import { HomePage } from "./pages/HomePage";
@@ -17,11 +17,9 @@ const App = () => {
   if (appLoading) {
     return (
       <div className="min-h-[100vh] flex flex-col items-center justify-center gap-10 content-center">
-        <BounceLoader size="175px" color="#2020ff" />
+        <RingLoader size="175px" color="#2020ff" />
         <div className="border-1 border-lime-800 p-8 rounded-lg">
-          <p>Please note:</p>
-          <p>Backend is hosted on free server</p>
-          <p>It may take upto 2 minutes to warmup (for the first time)!</p>
+          <p>Loading......</p>
         </div>
       </div>
     );
