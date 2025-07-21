@@ -5,7 +5,7 @@ import { BounceLoader } from "react-spinners";
 import { SignupPage } from "./pages/SignupPage";
 import { LoginPage } from "./pages/LoginPage";
 import { HomePage } from "./pages/HomePage";
-import { NotFoundPage } from "./pages/NotFoundPage";
+import { NotFoundPage } from "./pages/NotfoundPage";
 import { CartPage } from "./pages/CartPage";
 import { AboutusPage } from "./pages/AboutusPage";
 
