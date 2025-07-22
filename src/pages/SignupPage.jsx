@@ -6,18 +6,20 @@ import { ErrorToast, SuccessToast } from "../utils/toastHelper";
 const SignupPage = () => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+  const [role, setRole] = useState("user");
   const navigate = useNavigate();
 
   const handleRegister = async () => {
     try {
-      if (!email || !password) {
-        ErrorToast("Email and password are required!");
+      if (!email || !password || !role) {
+        ErrorToast("Email, password, and role are required!");
         return;
       }
 
       const dataObj = {
         email,
         password,
+        role,
       };
 
       const result = await axiosInstance.post("/auth/signup", dataObj);
@@ -52,6 +54,7 @@ const SignupPage = () => {
             className="border-1 rounded-md py-1 px-2 text-indigo-700"
           />
         </div>
+
         <div className="flex gap-4 items-center">
           <label className="text-gray-700" htmlFor="user-password">
             Password:
@@ -66,6 +69,25 @@ const SignupPage = () => {
             className="border-1 rounded-md py-1 px-2 text-indigo-700"
           />
         </div>
+
+        <div className="flex gap-4 items-center">
+          <label className="text-gray-700" htmlFor="user-role">
+            Role:
+          </label>
+          <select
+            id="user-role"
+            name="role"
+            required
+            value={role}
+            onChange={(e) => setRole(e.target.value)}
+            className="border-1 rounded-md py-1 px-2 text-indigo-700"
+          >
+            <option value="">-- Select Role --</option>
+            <option value="user">User</option>
+            <option value="admin">Admin</option>
+          </select>
+        </div>
+
         <div className="flex flex-col gap-3 items-center self-stretch">
           <button
             className="border-1 py-1 px-2 rounded-lg text-xl bg-green-700 text-white cursor-pointer"

@@ -1,5 +1,4 @@
-import { Route, Routes } from "react-router";
-import { BrowserRouter } from "react-router";
+import { BrowserRouter, Route, Routes, Navigate } from "react-router";
 import useAppContext from "./contexts/useAppContext";
 import { BounceLoader, RingLoader } from "react-spinners";
 import { SignupPage } from "./pages/SignupPage";
@@ -8,6 +7,8 @@ import { HomePage } from "./pages/HomePage";
 import { NotFoundPage } from "./pages/NotfoundPage";
 import { CartPage } from "./pages/CartPage";
 import { AboutusPage } from "./pages/AboutusPage";
+import { AdminPage } from "./pages/AdminPage";
+import { OrderSuccessPage } from "./pages/OrderSuccessPage";
 
 const App = () => {
   const { appLoading, user } = useAppContext();
@@ -32,16 +33,19 @@ const App = () => {
           <>
             <Route path="/signup" element={<SignupPage />} />
             <Route path="/login" element={<LoginPage />} />
-            <Route path="*" element={<LoginPage />} />
+            {/* <Route path="*" element={<Navigate to="/login" replace />} /> */}
           </>
         ) : (
           <>
             <Route path="/" element={<HomePage />} />
             <Route path="/cart" element={<CartPage />} />
             <Route path="/aboutus" element={<AboutusPage />} />
-            <Route path="*" element={<NotFoundPage />} />
+
+            {/* <Route path="*" element={<NotFoundPage />} /> */}
           </>
         )}
+        <Route path="/admin" element={<AdminPage />} />
+        <Route path="/order-success" element={<OrderSuccessPage />} />
       </Routes>
     </BrowserRouter>
   );

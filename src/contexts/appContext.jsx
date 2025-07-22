@@ -6,8 +6,18 @@ const AppContext = createContext();
 
 const AppContextProvider = ({ children }) => {
   const [appLoading, setAppLoading] = useState(true);
-  const [count, setCount] = useState(0);
+  const [count, setCount] = useState(() => {
+    const storedCount = localStorage.getItem("cartCount");
+    return storedCount ? Number(storedCount) : 0;
+  });
+
+  const [cartItems, setCartItems] = useState(() => {
+    const storedItems = localStorage.getItem("cartItems");
+    return storedItems ? JSON.parse(storedItems) : [];
+  });
+
   const [user, setUser] = useState({ isAuthenticated: false });
+  const [searchQuery, setSearchQuery] = useState("");
 
   const getUserDetails = async () => {
     try {
@@ -32,12 +42,25 @@ const AppContextProvider = ({ children }) => {
     getUserDetails();
   }, []);
 
+  // 🔁 Persist count & cartItems to localStorage on change
+  useEffect(() => {
+    localStorage.setItem("cartCount", count);
+  }, [count]);
+
+  useEffect(() => {
+    localStorage.setItem("cartItems", JSON.stringify(cartItems));
+  }, [cartItems]);
+
   const valueObj = {
     appLoading,
     user,
     setUser,
     count,
     setCount,
+    cartItems,
+    setCartItems,
+    searchQuery,
+    setSearchQuery,
   };
 
   return <AppContext.Provider value={valueObj}>{children}</AppContext.Provider>;

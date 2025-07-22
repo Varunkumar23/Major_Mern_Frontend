@@ -1,12 +1,20 @@
 import { Link, useNavigate } from "react-router";
+import { useState } from "react";
 import useAppContext from "../contexts/useAppContext";
 import { axiosInstance } from "../axios/axiosInstance";
 import { AppContext } from "../contexts/appContext";
+import logo from "../assets/logo.jpg";
 
 const Navbar = () => {
-  const { user = {}, setUser, count } = useAppContext();
+  const { user = {}, setUser, count, setSearchQuery } = useAppContext();
   const { isAuthenticated } = user;
   const navigate = useNavigate();
+  const [input, setInput] = useState("");
+
+  const handleSearch = () => {
+    setSearchQuery(input.trim());
+    setInput("");
+  };
 
   const handleLogout = async () => {
     try {
@@ -20,8 +28,18 @@ const Navbar = () => {
 
   return (
     <nav className="bg-gray-400 shadow-md px-8 py-4 flex items-center justify-between sticky top-0 z-50">
-      <div className="text-2xl font-bold text-gray-800 tracking-wide">
-        🛒 Shopping App
+      <div className="flex items-center gap-1">
+        <img
+          src={logo}
+          alt="Elevate Mart Logo"
+          className="h-16 w-16 object-contain rounded-full"
+        />
+        <div className="text-2xl font-bold text-gray-800 tracking-wide">
+          Elevate
+        </div>
+        <div className="text-2xl font-bold text-zinc-100 tracking-wide">
+          Mart
+        </div>
       </div>
 
       <div className="flex items-center w-1/3">
@@ -29,8 +47,13 @@ const Navbar = () => {
           type="text"
           placeholder="Search products..."
           className="w-full px-4 py-2 rounded-l-md border border-black  text-black"
+          onChange={(e) => setInput(e.target.value)}
+          value={input}
         />
-        <button className="px-4 py-2 bg-black text-white rounded-r-md hover:bg-yellow-700 transition mx-1.5 rounded-2xl">
+        <button
+          className="px-4 py-2 bg-black text-white rounded-r-md hover:bg-yellow-700 transition mx-1.5 rounded-2xl"
+          onClick={handleSearch}
+        >
           Search
         </button>
       </div>

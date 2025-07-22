@@ -7,7 +7,7 @@ import { AppContext } from "../contexts/appContext";
 
 const HomePage = () => {
   const [products, setProducts] = useState([]);
-  const { setCount } = useAppContext();
+  const { setCount, cartItems, setCartItems, searchQuery } = useAppContext();
 
   const fetchProducts = async () => {
     try {
@@ -25,6 +25,12 @@ const HomePage = () => {
     }
   };
 
+  const filteredProducts = products.filter(
+    (product) =>
+      product.title &&
+      product.title.toLowerCase().includes((searchQuery || "").toLowerCase())
+  );
+
   useEffect(() => {
     fetchProducts();
   }, []);
@@ -38,23 +44,31 @@ const HomePage = () => {
 
         {/* Product Grid */}
         <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6">
-          {products.map((product) => (
+          {filteredProducts.map((product) => (
             <div
               key={product._id}
               className="border rounded-lg p-4 shadow-md hover:shadow-lg transition"
             >
               <img
-                src={product.image || "https://via.placeholder.com/150"}
-                alt={product.name}
+                src={product.images}
+                alt={product.title}
                 className="w-full h-40 object-cover rounded"
               />
-              <h2 className="text-lg font-semibold mt-2">{product.name}</h2>
+
+              <h2 className="text-lg font-semibold mt-2">{product.title}</h2>
               <p className="text-sm text-gray-500">{product.category}</p>
+              <p className="text-sm text-gray-500">Brand: {product.brand}</p>
+              <p className="text-sm text-gray-500">Ratings: {product.rating}</p>
               <p className="text-green-700 font-bold mt-1">₹ {product.price}</p>
               <button
                 className="mt-3 bg-green-600 text-white px-4 py-1 rounded"
                 onClick={() => {
-                  setCount((prev)=>prev+1);
+                  if (!cartItems.find((item) => item._id === product._id)) {
+                    setCartItems([...cartItems, product]);
+                    setCount((prev) => prev + 1);
+                  } else {
+                    alert("Product is already in the cart");
+                  }
                 }}
               >
                 Add to Cart
