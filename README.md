@@ -1,12 +1,62 @@
-# React + Vite
+# 🛒 Elevate Mart – Frontend
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+This is the **React.js frontend** for Elevate Mart, a full-stack eCommerce web application. Users can browse products, manage their cart, and checkout securely.
 
-Currently, two official plugins are available:
+---
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+## 🚀 Live Demo
 
-## Expanding the ESLint configuration
+[👉 View Live Frontend](https://major-mern-frontend.vercel.app/)
 
-If you are developing a production application, we recommend using TypeScript with type-aware lint rules enabled. Check out the [TS template](https://github.com/vitejs/vite/tree/main/packages/create-vite/template-react-ts) for information on how to integrate TypeScript and [`typescript-eslint`](https://typescript-eslint.io) in your project.
+---
+
+## 🛠️ Tech Stack
+
+- React
+- Tailwind CSS
+- Axios
+- React Router DOM
+
+---
+
+## ✨ Features
+
+- Browse all products
+- View individual product details
+- Add or remove items from cart
+- User registration and login (JWT-based, cookie stored)
+- Auto logout after 10 minutes of inactivity
+- Admin dashboard access (role-based)
+- Responsive UI
+
+---
+
+## 📁 Folder Structure
+frontend/
+├── src/
+│ ├── components/
+│ ├── pages/
+│ ├── context/
+│ ├── App.jsx
+│ └── index.js
+├── public/
+├── tailwind.config.js
+└── README.md
+
+
+---
+
+🧑‍💻 Getting Started
+
+1️⃣ Install Dependencies
+1.cd frontend
+2.npm install
+
+2️⃣ Run Frontend
+1.npm start
+
+🌐 Environment Variables
+1.REACT_APP_API_BASE_URL=BACKEND_URL
+
+
+
